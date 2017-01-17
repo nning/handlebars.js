@@ -48,6 +48,11 @@ describe('compiler', function() {
     it('can pass through an empty string', function() {
       equal(Handlebars.compile('')(), '');
     });
+
+    it('inserts ISML comments', function() {
+      equal(Handlebars.compile('<test>', {ismlComments: true})({}, {name: 'test'}),
+        '<!--- start: test --->\n<test><!--- end: test --->\n');
+    });
   });
 
   describe('#precompile', function() {
